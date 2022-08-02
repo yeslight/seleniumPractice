@@ -139,7 +139,7 @@ block = False
 #display = Display(visible=0, size=(800, 800))
 #display.start()
 print('- loading...')
-driver = uc.Chrome(use_subprocess=True, options=options)
+driver = uc.Chrome(use_subprocess=True)
 driver.set_window_size(785, 627)
 delay(2)
 set_driver(driver)

@@ -82,10 +82,12 @@ def loginStep1():
     time.sleep(5)
     
 def loginStep2():
+    print('***填入code' )
     write(EMAIL_CODE, into=S('@mailcode'))
     delay(2)
     click('Register')
     time.sleep(5)
+    print('***跳过邀请码' )
     click('skip')
     time.sleep(5)
     
@@ -117,10 +119,12 @@ def getEmailCode():
         driver.switch_to.window(driver.window_handles[0])
 
 def getSubUrl():
+    print('***进入sub页面' )
     go_to(urlCntentPage)
     delay(5)
     global SUB_URL
-    SUB_URL = str(driver.find_element(By.xpath, '//span[text()="copy to clipboard"]').get_attribute("data-clipboard-text"))
+    print('***查找链接' )
+    SUB_URL = str(driver.find_elements_by_xpath('//span[text()="copy to clipboard"]').get_attribute("data-clipboard-text"))
     print('***订阅链接:' + SUB_URL)
 
 ##
@@ -148,6 +152,7 @@ openAndGetMail()
 loginStep1()
 getEmailCode()
 if len(EMAIL_CODE)>1:
+    print('***验证码有效，准备注册')
     loginStep2()
     getSubUrl()
 else:

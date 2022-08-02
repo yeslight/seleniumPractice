@@ -88,12 +88,12 @@ def loginStep2():
     click('Register')
     time.sleep(5)
     print('***跳过邀请码' )
-    ActionChains(driver).move_by_offset(250, 490).click().perform()
+    driver.switch_to.default_content()
+    click('Skip')
     time.sleep(10)
     
 def getEmailCode():
     driver.switch_to.window(driver.window_handles[1])
-    #driver.get("file:///C:/Users/yesli/Desktop/test.html")
     time.sleep(5)
     table = driver.find_element(By.CLASS_NAME, 'ui.celled.selectable.table')
     table_rows = table.find_elements(By.TAG_NAME, 'tr')
@@ -147,6 +147,7 @@ driver = uc.Chrome(use_subprocess=True)
 driver.set_window_size(785, 650)
 delay(2)
 set_driver(driver)
+
 go_to(urlLogin)
 openAndGetMail()
 loginStep1()

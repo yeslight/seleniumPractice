@@ -96,11 +96,11 @@ def getEmailCode():
     table = driver.find_element(By.CLASS_NAME, 'ui.celled.selectable.table')
     table_rows = table.find_elements(By.TAG_NAME, 'tr')
     print('***总行数:'+str(len(table_rows)))
-    times =1
+    times = 1
     try:
         while len(table_rows)<2:
             print('第'+str(times)+'等待')
-            times++
+            times = times+1
             time.sleep(2)
             table_rows = table.find_elements(By.TAG_NAME, 'tr')
     except Exception as e:

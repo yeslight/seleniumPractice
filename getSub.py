@@ -37,7 +37,7 @@ def urlDecode(s):
 def delay(i):
     time.sleep(i)
 
-def push(body):
+def push():
     print('- waiting for push result')
     # tg push
     if TG_BOT_TOKEN == '' or TG_USER_ID == '':
@@ -124,7 +124,7 @@ def getSubUrl():
     delay(5)
     global SUB_URL
     print('***查找链接' )
-    SUB_URL = str(driver.find_elements_by_xpath('//span[text()="copy to clipboard"]').get_attribute("data-clipboard-text"))
+    SUB_URL = str(driver.find_element_by_xpath('//span[text()="copy to clipboard"]').get_attribute("data-clipboard-text"))
     print('***订阅链接:' + SUB_URL)
 
 ##
@@ -156,5 +156,6 @@ if len(EMAIL_CODE)>1:
     print('***验证码有效，准备注册')
     loginStep2()
     getSubUrl()
+    push()
 else:
     print('***验证码获取异常')

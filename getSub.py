@@ -5,9 +5,9 @@ import os
 import ssl
 import sys
 import time
-import urllib
 from random import randint
-
+from qiniu import Auth, put_file, etag
+import qiniu.config
 import requests
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
@@ -29,7 +29,28 @@ try:
 except:
     # 本地调试用
     TG_USER_ID = ''
+    
+try:
+    QN_AK = os.environ['QN_AK']
+except:
+    # 本地调试用
+    QN_AK = ''
+    
+try:
+    QN_SK = os.environ['QN_SK']
+except:
+    # 本地调试用
+    QN_SK = ''
 
+try:
+    BUCKET_NAME = os.environ['BUCKET_NAME']
+except:
+    # 本地调试用
+    BUCKET_NAME = ''
+
+policy={
+
+ }
 
 def urlDecode(s):
     return str(base64.b64decode(s + '=' * (4 - len(s) % 4))).split('\'')[1]
@@ -37,13 +58,12 @@ def urlDecode(s):
 def delay(i):
     time.sleep(i)
 
-def push():
+def push(body):
     print('- waiting for push result')
     # tg push
     if TG_BOT_TOKEN == '' or TG_USER_ID == '':
         print('*** No TG_BOT_TOKEN or TG_USER_ID ***')
     else:
-        body = SUB_URL
         print('body='+body)
         server = 'https://api.telegram.org'
         tgurl = server + '/bot' + TG_BOT_TOKEN + '/sendMessage'
@@ -121,14 +141,31 @@ def getEmailCode():
 def getSubUrl():
     print('***进入sub页面' )
     go_to(urlCntentPage)
+    #go_to('file://C:/Users/yesli/Desktop/GLaDOS.html')
     delay(5)
     global SUB_URL
     print('***查找链接' )
     SUB_URL = str(driver.find_element_by_xpath('//button[text()="copy to clipboard"]').get_attribute("data-clipboard-text"))
     print('***订阅链接:' + SUB_URL)
+    push(SUB_URL)
+    
+def pushToQn():
+    print('下载文件')
+    r = requests.get(SUB_URL)
+    with open("temp.yaml", "wb") as code:
+        code.write(r.content)
+    filename = 'gla.yaml'
+    q = Auth(QN_AK, QN_SK)
+    token = q.upload_token(BUCKET_NAME, filename, 3600, policy)
+    localfile = './temp.yaml'
+    ret, info = put_file(token, filename, localfile, version='v2')
+    print(info)
+    push("转存至七牛成功")
 
 ##
+urlWrite = urlDecode('V29pZGVuLmlk')
 urlLogin = urlDecode('aHR0cHM6Ly9nbGFkb3Mucm9ja3MvcmVnaXN0ZXI=')
+urlRenew = urlDecode('aHR0cHM6Ly93b2lkZW4uaWQvdnBzLXJlbmV3')
 urlCntentPage = urlDecode('aHR0cHM6Ly9nbGFkb3Mucm9ja3MvY29uc29sZS9jbGFzaA==')
 EMAIL = ''
 EMAIL_CODE = ''
@@ -146,6 +183,7 @@ driver.set_window_size(785, 650)
 delay(2)
 set_driver(driver)
 
+
 go_to(urlLogin)
 openAndGetMail()
 loginStep1()
@@ -154,6 +192,6 @@ if len(EMAIL_CODE)>1:
     print('***验证码有效，准备注册')
     loginStep2()
     getSubUrl()
-    push()
+    pushToQn()
 else:
     print('***验证码获取异常')

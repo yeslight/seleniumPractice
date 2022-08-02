@@ -88,7 +88,7 @@ def loginStep2():
     click('Register')
     time.sleep(5)
     print('***跳过邀请码' )
-    click('skip')
+    click('Skip')
     time.sleep(5)
     
 def getEmailCode():

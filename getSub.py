@@ -124,7 +124,7 @@ def getSubUrl():
     delay(5)
     global SUB_URL
     print('***查找链接' )
-    SUB_URL = str(driver.find_element_by_xpath('//span[text()="copy to clipboard"]').get_attribute("data-clipboard-text"))
+    SUB_URL = str(driver.find_element_by_xpath('//button[text()="copy to clipboard"]').get_attribute("data-clipboard-text"))
     print('***订阅链接:' + SUB_URL)
 
 ##

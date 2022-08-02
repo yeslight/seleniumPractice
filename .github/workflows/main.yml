@@ -32,6 +32,9 @@ jobs:
           env:
             TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
             TG_USER_ID: ${{ secrets.TG_USER_ID }}
+            QN_AK: ${{ secrets.QN_AK }}
+            QN_SK: ${{ secrets.QN_SK }}
+            BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
 
           run: |
             python3 ./getSub.py

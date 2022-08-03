@@ -64,7 +64,6 @@ def push(body):
     if TG_BOT_TOKEN == '' or TG_USER_ID == '':
         print('*** No TG_BOT_TOKEN or TG_USER_ID ***')
     else:
-        print('body='+body)
         server = 'https://api.telegram.org'
         tgurl = server + '/bot' + TG_BOT_TOKEN + '/sendMessage'
         rq_tg = requests.post(tgurl, data={'chat_id': TG_USER_ID, 'text': body}, headers={
@@ -141,7 +140,6 @@ def getEmailCode():
 def getSubUrl():
     print('***进入sub页面' )
     go_to(urlCntentPage)
-    #go_to('file://C:/Users/yesli/Desktop/GLaDOS.html')
     delay(5)
     global SUB_URL
     print('***查找链接' )

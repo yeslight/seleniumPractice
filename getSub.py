@@ -146,7 +146,6 @@ def getSubUrl():
     global SUB_URL
     print('***查找链接' )
     SUB_URL = str(driver.find_element_by_xpath('//button[text()="copy to clipboard"]').get_attribute("data-clipboard-text"))
-    print('***订阅链接:' + SUB_URL)
     push(SUB_URL)
     
 def pushToQn():
@@ -163,9 +162,7 @@ def pushToQn():
     push("转存至七牛成功")
 
 ##
-urlWrite = urlDecode('V29pZGVuLmlk')
 urlLogin = urlDecode('aHR0cHM6Ly9nbGFkb3Mucm9ja3MvcmVnaXN0ZXI=')
-urlRenew = urlDecode('aHR0cHM6Ly93b2lkZW4uaWQvdnBzLXJlbmV3')
 urlCntentPage = urlDecode('aHR0cHM6Ly9nbGFkb3Mucm9ja3MvY29uc29sZS9jbGFzaA==')
 EMAIL = ''
 EMAIL_CODE = ''

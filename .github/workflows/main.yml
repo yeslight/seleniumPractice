@@ -4,7 +4,7 @@ on:
   #push:
   schedule:
     # UTC (国内 UTC+8)
-     - cron: '08 12 */2 * *'
+     - cron: '08 10 */2 * *'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 

@@ -144,7 +144,7 @@ def getSubUrl():
     global SUB_URL
     print('***查找链接' )
     SUB_URL = str(driver.find_element_by_xpath('//button[text()="copy to clipboard"]').get_attribute("data-clipboard-text"))
-    push(SUB_URL)
+    push(EMAIL+'\n\n'+SUB_URL)
     
 def pushToQn():
     print('下载文件')

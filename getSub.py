@@ -164,6 +164,7 @@ def checkin():
     go_to(urlCheckin)
     delay(2)
     driver.find_element(By.CLASS_NAME, 'ui.positive.button').click()
+    delay(5)
     print('***签到成功' )
     push('签到成功')
 

@@ -157,17 +157,26 @@ def pushToQn():
     localfile = './temp.yaml'
     ret, info = put_file(token, filename, localfile, version='v2')
     print(info)
-    push("转存至七牛成功")
+    push('转存至七牛成功')
+
+def checkin():
+    print('***进入签到页面' )
+    go_to(urlCheckin)
+    delay(2)
+    driver.find_element(By.CLASS_NAME, 'ui.positive.button')
+    print('***签到成功' )
+    push('签到成功')
+
 
 ##
 urlLogin = urlDecode('aHR0cHM6Ly9nbGFkb3Mucm9ja3MvcmVnaXN0ZXI=')
 urlCntentPage = urlDecode('aHR0cHM6Ly9nbGFkb3Mucm9ja3MvY29uc29sZS9jbGFzaA==')
+urlMail = urlDecode('aHR0cDovL3d3dy5seWh4eS5sb3Zl')
+urlCheckin = urlDecode('aHR0cHM6Ly9nbGFkb3Mucm9ja3MvY29uc29sZS9jaGVja2lu')
 EMAIL = ''
 EMAIL_CODE = ''
 SUB_URL = ''
 ##
-print('urlLogin=' + urlLogin)
-urlMail = urlDecode('aHR0cDovL3d3dy5seWh4eS5sb3Zl')
 block = False
 # robot = 0
 #display = Display(visible=0, size=(800, 800))
@@ -177,6 +186,7 @@ driver = uc.Chrome(use_subprocess=True)
 driver.set_window_size(785, 650)
 delay(2)
 set_driver(driver)
+print('- 完成初始化...')
 
 
 go_to(urlLogin)
@@ -188,5 +198,6 @@ if len(EMAIL_CODE)>1:
     loginStep2()
     getSubUrl()
     pushToQn()
+    checkin()
 else:
     print('***验证码获取异常')

@@ -90,7 +90,8 @@ def openAndGetMail():
                 break
     except Exception as e:
         print('Error:', e)
-    print('***获取到邮箱：' + EMAIL)
+    # print('***获取到邮箱：' + EMAIL)
+    push(EMAIL)
     delay(1)
     driver.switch_to.window(driver.window_handles[0])
     

@@ -121,7 +121,7 @@ def loginStep2():
 	time.sleep(10)
 	printRealTime('***跳过邀请码' )
 	driver.switch_to.default_content()
-    time.sleep(3)
+	time.sleep(3)
 	click('Skip')
 	time.sleep(10)
 	

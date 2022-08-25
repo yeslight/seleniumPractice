@@ -1,0 +1,41 @@
+name: 'getSub'
+
+on:
+  #push:
+  schedule:
+    # UTC (国内 UTC+8)
+     - cron: '35 23 2-31/2 * *'
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    #runs-on: macos-latest
+    runs-on: macos-12
+
+    steps:
+        - name: 'Checkout codes'
+          uses: actions/checkout@v2
+          
+        - name: 'Update Chrome'           
+          run: |
+            brew reinstall --cask google-chrome
+        - name: 'Install requirements'
+          run: |
+            pip3 install -r ./requirements.txt
+            pip3 install undetected-chromedriver
+            yes | pip3 uninstall selenium
+            pip3 install selenium==4.2.0
+            
+        - name: 'GET_SUB'
+          env:
+            TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+            TG_USER_ID: ${{ secrets.TG_USER_ID }}
+            QN_AK: ${{ secrets.QN_AK }}
+            QN_SK: ${{ secrets.QN_SK }}
+            BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
+            MAIL_DOMAIN: ${{ secrets.MAIL_DOMAIN }}
+            SEQ: 2
+
+          run: |
+            python3 ./getSub.py

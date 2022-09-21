@@ -207,6 +207,7 @@ else:
 EMAIL = ''
 EMAIL_CODE = ''
 SUB_URL = ''
+INVITE_CODE = 'OI4ZI-QZ2UZ-E23AB-LY2G0'
 ##
 block = False
 # robot = 0

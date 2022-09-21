@@ -227,6 +227,8 @@ getEmailCode()
 if len(EMAIL_CODE)>1:
 	printRealTime('***验证码有效，准备注册')
 	loginStep2()
+	#skip()
+	invite()
 	getSubUrl()
 	pushToQn()
 	checkin()

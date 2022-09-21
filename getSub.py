@@ -119,12 +119,22 @@ def loginStep2():
 	delay(2)
 	click('Register')
 	time.sleep(10)
+
+def skip():
 	printRealTime('***跳过邀请码' )
 	driver.switch_to.default_content()
 	time.sleep(3)
 	click('Skip')
 	time.sleep(10)
-	
+
+def invite():
+	printRealTime('***准备填入邀请码' )
+	driver.switch_to.default_content()
+	time.sleep(3)
+	write(INVITE_CODE, into=S('@code'))
+	click('Next')
+	time.sleep(10)
+
 def getEmailCode():
 	driver.switch_to.window(driver.window_handles[1])
 	time.sleep(5)

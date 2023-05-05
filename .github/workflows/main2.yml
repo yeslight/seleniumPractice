@@ -1,4 +1,4 @@
-name: 'getSub2'
+name: 'spotify'
 
 on:
   #push:
@@ -31,10 +31,8 @@ jobs:
           env:
             TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
             TG_USER_ID: ${{ secrets.TG_USER_ID }}
-            QN_AK: ${{ secrets.QN_AK }}
-            QN_SK: ${{ secrets.QN_SK }}
-            BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
-            MAIL_DOMAIN: ${{ secrets.MAIL_DOMAIN }}
+            EMAIL: ${{ secrets.EMAIL }}
+            PWD: ${{ secrets.EMAIL }}
 
           run: |
-            python3 ./getSub.py
+            python3 ./spotifyLogin.py
